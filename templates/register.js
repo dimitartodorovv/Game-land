@@ -1,17 +1,21 @@
+import {Router} from 'https://unpkg.com/@vaadin/router'
 import { html, render } from 'https://unpkg.com/lit-html?module';
+import {showInfo} from '../controller/notification.js'
+import {register} from '../controller/auth.js'
 
-const templateRegister = () => html`
+
+const templateRegister = (ctx) => html`
  <nav-components></nav-components>
 
  <main class="main-game">
 
     <div class="container auth">
-        <form action="/register" method="POST">
+        <form action="/register" method="POST" @submit=${ctx.loginPost}>
             <fieldset>
                 <legend>Register</legend>
                 <blockquote></blockquote>
                 <p class="field email">
-                    <input type="email" id="email" name="email" placeholder="maria@email.com">
+                    <input type="text" id="email" name="email" placeholder="maria@email.com">
                     <label for="email">Email:</label>
                 </p>
                 <p class="field password">
@@ -38,15 +42,54 @@ const templateRegister = () => html`
 `
 
 
-
-
 export default class Register extends HTMLElement {
+
+
+     loginPost(e){
+        e.preventDefault();
+        let formData = new FormData(e.target);
+
+        let emailRegex = /[A-z0-9]{3,}@(email|gmail|mail|abv).(com|bg|net)/g;
+
+        let email = formData.get('email');
+        let password = formData.get('password');
+        let repPassword = formData.get ('reppass')
+        
+        if(email.length < 3){
+            showInfo('Email is not correct!')
+               return; 
+        }
+        if(!emailRegex.test(email)){
+            showInfo('Email is not correct!')
+            return;
+        }
+        if(password !== repPassword){
+                showInfo(`Password doesn't match!`);
+                return;
+        }
+        if(password < 6){
+            showInfo(`Password is short!`);
+            return;
+        }
+
+        let data =  register(email,password)
+        .then(res=> {
+
+            localStorage.setItem("gameLend",JSON.stringify({email: res.email,token: res.idToken,id: res.localId}))
+
+                Router.go('/')
+        })
+       
+
+        console.log(data);
+    }
+
 
     connectedCallback() {
         this.render()
     }
 
     render() {
-        render(templateRegister(), this)
+        render(templateRegister(this), this)
     }
 }
