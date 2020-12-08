@@ -10,7 +10,7 @@ export const  userDATA = {
 
 
 
-function loggedUser() {
+export function loggedUser() {
 
 
     try {

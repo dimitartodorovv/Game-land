@@ -1,11 +1,13 @@
+import {Router} from 'https://unpkg.com/@vaadin/router'
 import { html, render } from 'https://unpkg.com/lit-html?module';
+import {login} from '../controller/auth.js'
 
 
-const templateLogin = () => html`
+const templateLogin = (ctx) => html`
     <nav-components></nav-components>
 <main class="main-game">
  <div class="container auth">
-<form action="/login" method="POST">
+<form action="/login" method="POST" @submit=${ctx.loginPost}>
     <fieldset>
         <legend>Login</legend>
         <blockquote></blockquote>
@@ -35,11 +37,29 @@ const templateLogin = () => html`
 
 export default class Register extends HTMLElement {
 
+    loginPost(e) {
+            e.preventDefault();
+
+            let formData = new FormData(e.target);
+           
+            let email = formData.get('email');
+            let password = formData.get('password')
+
+            login(email,password).then(res => {
+
+                localStorage.setItem("gameLend",JSON.stringify({email: res.email,token: res.idToken,id: res.localId}))
+
+                    Router.go('/market')
+            })
+          
+    }
+
+
     connectedCallback() {
         this.render()
     }
 
     render() {
-        render(templateLogin(), this)
+        render(templateLogin(this), this)
     }
 }

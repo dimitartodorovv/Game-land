@@ -10,7 +10,7 @@ const templateRegister = (ctx) => html`
  <main class="main-game">
 
     <div class="container auth">
-        <form action="/register" method="POST" @submit=${ctx.loginPost}>
+        <form action="/register" method="POST" @submit=${ctx.registerPost}>
             <fieldset>
                 <legend>Register</legend>
                 <blockquote></blockquote>
@@ -45,7 +45,7 @@ const templateRegister = (ctx) => html`
 export default class Register extends HTMLElement {
 
 
-     loginPost(e){
+     registerPost(e){
         e.preventDefault();
         let formData = new FormData(e.target);
 
@@ -53,8 +53,8 @@ export default class Register extends HTMLElement {
 
         let email = formData.get('email');
         let password = formData.get('password');
-        let repPassword = formData.get ('reppass')
-        
+        let repPassword = formData.get ('reppass');
+       
         if(email.length < 3){
             showInfo('Email is not correct!')
                return; 
@@ -77,7 +77,7 @@ export default class Register extends HTMLElement {
 
             localStorage.setItem("gameLend",JSON.stringify({email: res.email,token: res.idToken,id: res.localId}))
 
-                Router.go('/')
+                Router.go('/market')
         })
        
 

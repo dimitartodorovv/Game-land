@@ -69,3 +69,14 @@ export async function register(email,password){
 
     return registration;
 }
+
+export async function login(email,password){
+
+    let login = await post(endpoint.LOGIN, {
+        email,
+        password
+    })
+
+    return login
+}
+
