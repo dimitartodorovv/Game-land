@@ -51,20 +51,20 @@ body{
 .avatar{
   display: flex;
   flex-wrap: wrap;
-  background-color: gray;
+  background-image: linear-gradient(25deg, rgb(60, 221, 208), rgb(81, 113, 255));
   border-radius: 12px;
   margin: 25px;
-  height: 60%;
+  height: 70%;
   justify-content: center;
 }
 
 .avatar-image {
-  width: 300px;
+  width: 200px;
 }
 
 
 .user-inputs{
-  margin: 25px 0px 5px 10px;
+  margin: 40px 0px 5px 10px;
 }
 .user-information input{
   border-radius: 3px;
@@ -90,7 +90,7 @@ body{
 }
 
 .sex-user {
-   margin: 20px;
+   margin: 40px;
 }
 
 .sex-user label {
@@ -100,20 +100,21 @@ body{
 .sex-user p {
   padding-right: 5px;
 }
+
 .btn-user{
-  height: 120px;
-  background-color: #4CAF50;
+  margin-top: 30px;
+  margin-left: 60px;
+  height: 60px;
+  background-color: black;
   border: none;
   color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
-  margin: 4px 2px;
   cursor: pointer;
   border-radius: 12px;
 }
-
 
 
 
@@ -394,6 +395,47 @@ div.container {
     border-radius: 8px;
     /* margin: 6em auto; */
 }
+
+/* Make offer */
+
+.game-titleAdd {
+  text-align: center;
+}
+.container-offer {
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(25deg, rgb(60, 221, 208), rgb(81, 113, 255));
+  border-radius: 12px;
+  margin: 15px;
+  padding: 10px 0px 5px 0px;
+ align-items: center;
+ 
+}
+.addGame {
+  margin-top: 20px;
+}
+.des-leb{
+    align-items: center;
+}
+.des-game{
+    width: 300px;
+}
+.create-game {
+  margin-top: 20px;
+  height: 60px;
+  width: 100px;
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 12px;
+ 
+}
+
 /* Button effect */
 .container .btn::before {
     content: '';
@@ -723,6 +765,11 @@ footer {
   /* overflow: hidden; */
    display: flex;
   flex-wrap: wrap; 
+}
+
+.cards-temp {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .cards-maker{
