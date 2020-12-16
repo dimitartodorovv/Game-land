@@ -4,7 +4,7 @@ import { loggedUser } from '../controller/data/userDATA.js'
 const templateNav = (ctx) => html`
 
     <nav class="navbar">
-        ${!ctx ? html`
+        ${!ctx.email ? html`
         <div class="icon-comp"><img src="/img/gameicopn 2.png" alt="">
         </div>
         <a href="/"><i class="fas fa-home"></i></a>
@@ -26,8 +26,12 @@ const templateNav = (ctx) => html`
                         <li><a href="">Submenu item</a></li> -->
                 </ul>
             </li>
-        </ul>`}
-        ${!ctx ? html`
+        </ul>
+            <a href="/messages" class="message-users"><i class="fas fa-envelope"></i>
+        <span class="badge">3</span>
+             </a>
+        `}
+        ${!ctx.email ? html`
         <ul class="nav-bar game">         
             <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
@@ -38,7 +42,7 @@ const templateNav = (ctx) => html`
         </ul>` : html ` 
         <ul class="nav-bar game">   
         <li class="nav-item">
-                <a class="nav-link">Welcome, ${ctx}</a>
+                <a class="nav-link">Welcome, ${ctx.email}</a>
             </li>
            
             <li class="nav-item">
@@ -55,14 +59,16 @@ const templateNav = (ctx) => html`
 export default class Nav extends HTMLElement {
 
 
-    connectedCallback() {
+    connectedCallback() {  
+        let email =  loggedUser().email.split('@');
+        this.email = email[0];
         this.render();
     }
 
     render() {
-       let email =  loggedUser().email.split('@')
+       
       
-        render(templateNav(email[0]), this)
+        render(templateNav(this), this)
     }
 
 }

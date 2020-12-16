@@ -75,7 +75,7 @@ export default class Register extends HTMLElement {
         let data =  register(email,password)
         .then(res=> {
 
-            localStorage.setItem("gameLend",JSON.stringify({email: res.email,token: res.idToken,id: res.localId}))
+            localStorage.setItem("gameLand",JSON.stringify({email: res.email,token: res.idToken,id: res.localId}))
 
                 Router.go('/market')
         })

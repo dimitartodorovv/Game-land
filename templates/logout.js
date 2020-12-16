@@ -6,7 +6,7 @@ export default class Logout extends HTMLElement {
 
     connectedCallback() {
         
-        localStorage.removeItem('gameLend');
+        localStorage.removeItem('gameLand');
 
         Router.go('/login')
 

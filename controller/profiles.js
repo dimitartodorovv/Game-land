@@ -23,14 +23,14 @@ export async function getUserProfile() {
         return data
 }
 
-export async function changeUser(name,dateOfBirth,city,phone,category,id) {
+export async function changeUser(name,dateOfBirth,city,phone,favCategory,id) {
 
     let userCHange = {
         name,
         dateOfBirth,
         city,
         phone,
-        category
+        favCategory
     }
 
     let result = fetch(`${API_profiles}/${id}.json`,{method: "PATCH", body: JSON.stringify(userCHange)})

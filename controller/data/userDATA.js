@@ -14,7 +14,7 @@ export function loggedUser() {
 
 
     try {
-        let userDATA = JSON.parse(localStorage.getItem('gameLend'));
+        let userDATA = JSON.parse(localStorage.getItem('gameLand'));
         if(!userDATA){
             throw new error 
         }

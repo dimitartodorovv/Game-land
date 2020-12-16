@@ -5,8 +5,8 @@ const templateMarketCard = (ctx) => html`
    
     ${ctx.data.map(game => html` 
     <div class="cards-maker">
-    <img class="image-cards" src="${game.imageUrl}" alt="game imgae">
-        <span>Game details: ${game.details}</span>
+    <img class="image-cards" src="${game.imgUrl}" alt="game imgae">
+        <span>Game details: ${game.description}</span>
         <a href="/details/${game.key}" class="btn-cards">Details</a>
            
         </div>    
@@ -31,7 +31,7 @@ export default class TemplateCardMarket extends HTMLElement {
     }
 
     render() {
-        
+     
         render(templateMarketCard(this), this)
     }
 
