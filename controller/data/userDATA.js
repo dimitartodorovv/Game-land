@@ -5,8 +5,10 @@ export const  userDATA = {
     email: loggedUser().email,
     token: loggedUser().token,
     id: loggedUser().id
+
 }
 
+export let token = [];
 
 
 
@@ -15,8 +17,8 @@ export function loggedUser() {
 
     try {
         let userDATA = JSON.parse(localStorage.getItem('gameLand'));
-        if(!userDATA){
-            throw new error 
+        if(userDATA === {}){
+            throw new Error("error") 
         }
 
         return  {
@@ -26,7 +28,7 @@ export function loggedUser() {
         }
 
     } catch (error) {
-
+        
         return{
             email: '',
             token: '',

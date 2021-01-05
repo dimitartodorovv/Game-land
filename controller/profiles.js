@@ -4,7 +4,7 @@ let API_profiles = `https://game-land-58011-default-rtdb.firebaseio.com/profiles
 
 export default async function makeProfile(name,dateOfBirth,city,phone,category,idUser){
    
-    // I need to save picture in cloud not in realtime database
+    
 
     let result = await fetch(`${API_profiles}.json`, {method: "POST", body: JSON.stringify({name,dateOfBirth,city,phone,category,idUser})})
 
@@ -37,3 +37,4 @@ export async function changeUser(name,dateOfBirth,city,phone,favCategory,id) {
 
     return result
 }
+

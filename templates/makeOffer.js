@@ -1,7 +1,12 @@
 import {Router} from 'https://unpkg.com/@vaadin/router'
 import { html, render } from 'https://unpkg.com/lit-html?module';
+import { loggedUser } from '../controller/data/userDATA.js';
 import { setGameInMarket } from '../controller/dataUsers.js'
 import {getUserProfile} from '../controller/profiles.js'
+import {showInfo,errorMessage} from '../controller/notification.js'
+
+
+
 const templateMakeOffer = (ctx) => html`
 
 <nav-components></nav-components>
@@ -74,29 +79,30 @@ export default class MakeOffer extends HTMLElement {
             let currency = document.querySelector('#currency').value
             let description = document.querySelector('#description-game').value
             let phoneNumber = document.querySelector('#phonenumber').value
-
+  
             let dates = Date();       
             let [day,month,date,years] = dates.split(' ')
             let uploadDate =`${day} ${month} ${date} ${years}`;
           
-            let id = JSON.parse( localStorage.getItem('gameLand')).id
+            let id = loggedUser().id
             let findUser = null;
 
             getUserProfile().then(res => {
-                console.log(res);
-               return res
+                return res
             }).then(data => {
                findUser = data.find(user => user.idUser == id)
+              
                 if(findUser){
                     return findUser
                 }else{
+                    showInfo("Create your acount")
                     Router.go('/profile')
                 }
             
             }).then(user => {
               
-                    setGameInMarket(name,category,imgUrl,price,currency,uploadDate,phoneNumber,user.name,user.key,description).then(res => {
-                    console.log(res) 
+                    setGameInMarket(name,category,imgUrl,price,currency,uploadDate,phoneNumber,user.name,user.key,description,id).then(res => {
+                   
                     Router.go('/market')
                 })
             })

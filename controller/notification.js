@@ -29,6 +29,10 @@ export function errorMessage(message) {
 
     boxes.error.children[0].textContent = `${message}`
     boxes.error.style.display = 'block'
+
+    setTimeout(() => {
+        boxes.error.style.display = 'none';
+       },3000)
 }    
 
 function HideErrorMessage(){

@@ -1,5 +1,8 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import { loggedUser } from '../controller/data/userDATA.js'
+import { loggedUser,token } from '../controller/data/userDATA.js'
+import {getUserProfile} from '../controller/profiles.js'
+import { getAllMessages } from '../controller/message.js';
+
 
 const templateNav = (ctx) => html`
 
@@ -28,7 +31,7 @@ const templateNav = (ctx) => html`
             </li>
         </ul>
             <a href="/messages" class="message-users"><i class="fas fa-envelope"></i>
-        <span class="badge">3</span>
+        <span class="badge">${ctx.emailCount}</span>
              </a>
         `}
         ${!ctx.email ? html`
@@ -60,9 +63,30 @@ export default class Nav extends HTMLElement {
 
 
     connectedCallback() {  
-        let email =  loggedUser().email.split('@');
-        this.email = email[0];
-        this.render();
+        let id = loggedUser().id;
+        let findUser = null;
+       
+        getUserProfile().then(res => {
+            let email =  loggedUser().email.split('@');
+        
+            findUser = res.find(el => el.idUser == id);
+        
+            if (findUser) {
+                this.email = findUser.name
+            }else {
+                this.email =  email[0]
+            }
+        }).then(res => {
+
+            getAllMessages().then(res => {
+           
+                this.emailCount = res.length
+    
+                this.render()
+            })
+        })
+       
+        
     }
 
     render() {
@@ -72,3 +96,6 @@ export default class Nav extends HTMLElement {
     }
 
 }
+
+
+

@@ -1,6 +1,6 @@
 import {Router} from 'https://unpkg.com/@vaadin/router'
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import {showInfo} from '../controller/notification.js'
+import {showInfo,errorMessage} from '../controller/notification.js'
 import {register} from '../controller/auth.js'
 
 
@@ -56,32 +56,47 @@ export default class Register extends HTMLElement {
         let repPassword = formData.get ('reppass');
        
         if(email.length < 3){
-            showInfo('Email is not correct!')
+            errorMessage('Email is not correct!')
                return; 
         }
         if(!emailRegex.test(email)){
-            showInfo('Email is not correct!')
+            errorMessage('Email is not correct!')
             return;
         }
         if(password !== repPassword){
-                showInfo(`Password doesn't match!`);
+            errorMessage(`Password doesn't match!`);
                 return;
         }
         if(password < 6){
-            showInfo(`Password is short!`);
+            errorMessage(`Password is short!`);
             return;
         }
 
-        let data =  register(email,password)
+     register(email,password)
         .then(res=> {
+            
 
-            localStorage.setItem("gameLand",JSON.stringify({email: res.email,token: res.idToken,id: res.localId}))
+            try {
+            
+                if(res.error){
+                    throw new Error(res.error.message) 
+                }
+
+                showInfo("Correct register!")
+           
+                localStorage.setItem("gameLand",JSON.stringify({email: res.email,token: res.idToken,id: res.localId}))
 
                 Router.go('/market')
+              } catch (error) {
+                  errorMessage(error)
+              }
+
+
+
         })
        
 
-        console.log(data);
+      
     }
 
 

@@ -1,7 +1,8 @@
 import { Router } from 'https://unpkg.com/@vaadin/router'
 import { html, render } from 'https://unpkg.com/lit-html?module';
 import makeProfile, { getUserProfile, changeUser } from '../controller/profiles.js'
-import { userDATA } from '../controller/data/userDATA.js'
+import { loggedUser, userDATA, token } from '../controller/data/userDATA.js'
+import { showInfo, errorMessage } from '../controller/notification.js';
 
 
 const templateProfile = (ctx) => html`
@@ -60,19 +61,34 @@ export default class Profile extends HTMLElement {
     makeProfile(e) {
         e.preventDefault();
 
-        let id = userDATA.id;
+        let ids = loggedUser().id;
         // Make check for empty inputs
+
+        let regDate = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
 
         let name = document.querySelector('#name-user').value;
         let dateOfBirth = document.querySelector('#dateOfBirth-user').value;
         let city = document.querySelector('#city-user').value;
         let phone = document.querySelector('#phonenumber-user').value;
         let category = document.querySelector('#category-user').value;
+      
+        if(name.length < 3 ){
+                errorMessage('The name is very short!')
+                return;
+        }
+        if(!regDate.test(dateOfBirth)){
+                errorMessage("Date is not correct!")
+                return;
+        }
+        if(phone.length < 10){
+            errorMessage("The number is not correct!")
+            return;
+        }
 
-       
+        makeProfile(name, dateOfBirth, city, phone, category, ids).then(res => {
 
-        makeProfile(name, dateOfBirth, city, phone, category, id).then(res => {
-
+     
+            localStorage.setItem('gameLand', JSON.stringify({email: name,token: token[0],id: ids}))
 
             Router.go('/market')
         })
@@ -84,7 +100,7 @@ export default class Profile extends HTMLElement {
 
     correctProfileUser(e) {
         e.preventDefault();
-        let id = userDATA.id;
+        let id = loggedUser().id;
         let findUser = null;
 
         let name = document.querySelector('#name-user').value;
@@ -111,11 +127,12 @@ export default class Profile extends HTMLElement {
     }
 
     connectedCallback() {
-        let id = userDATA.id;
+        let id = loggedUser().id;
         let findUser = null;
-
+        
         getUserProfile().then(res => {
             findUser = res.find(el => el.idUser == id);
+        
             if (findUser) {
                 this.data = findUser
             }else {

@@ -12,7 +12,7 @@ export async function getGameMarket() {
     return data
 }
 
-export async function setGameInMarket(title,category,imgUrl,price,currency,uploadDate,phoneNumber,userName,userKey,description) {
+export async function setGameInMarket(title,category,imgUrl,price,currency,uploadDate,phoneNumber,createrName,createrId,description,createrIdBaseDate) {
 
     let game = {
         title,
@@ -22,9 +22,10 @@ export async function setGameInMarket(title,category,imgUrl,price,currency,uploa
         currency,
         uploadDate,
         phoneNumber,
-        userName,
-        userKey,
+        createrName,
+        createrId,
         description,
+        createrIdBaseDate
       
     }
 

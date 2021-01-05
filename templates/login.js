@@ -1,7 +1,8 @@
 import {Router} from 'https://unpkg.com/@vaadin/router'
 import { html, render } from 'https://unpkg.com/lit-html?module';
 import {login} from '../controller/auth.js'
-
+import {showInfo,errorMessage} from '../controller/notification.js'
+import {token} from '../controller/data/userDATA.js'
 
 const templateLogin = (ctx) => html`
     <nav-components></nav-components>
@@ -44,12 +45,27 @@ export default class Register extends HTMLElement {
            
             let email = formData.get('email');
             let password = formData.get('password')
+        
 
             login(email,password).then(res => {
 
-                localStorage.setItem("gameLand",JSON.stringify({email: res.email,token: res.idToken,id: res.localId}))
-
-                    Router.go('/market')
+         
+                try {
+                   if(res.error){
+                     throw new Error(res.error.message)  
+                   }
+                  
+                   showInfo("Successful login!")
+                   token.push(res.idToken)
+                  localStorage.setItem("gameLand",JSON.stringify({email: res.email,token: res.idToken,id: res.localId}))
+                   
+                  Router.go('/market')
+                } catch (error) {
+                    errorMessage(error)
+                }
+              
+               
+               
             })
           
     }
