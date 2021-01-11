@@ -1,7 +1,8 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
 import { getAllMessages, messageUser } from '../controller/message.js';
 import { loggedUser, token } from '../controller/data/userDATA.js';
-import {Router} from 'https://unpkg.com/@vaadin/router'
+import {Router} from 'https://unpkg.com/@vaadin/router';
+import { timeNow } from '../controller/timeAndDate.js';
 
 
 const templateMessage = (ctx) => html`
@@ -18,12 +19,12 @@ const templateMessage = (ctx) => html`
    ${items.sender ? html `<div class="chatBox">
             <img src="/img/8964998576cfac440b3a14df748fc670.png" alt="Avatar">
             <p>${items.sender}</p>
-            <span class="time-right">11:00</span>
+            <span class="time-right">${items.time}</span>
         </div>` : html ` <div class="chatBox darker">
-            <img src="/img/fifa-estara-disponible-en-octubre-removebg-preview.png" alt="Avatar" class="right">
+            <img src="/img/8964998576cfac440b3a14df748fc670.png" alt="Avatar" class="right">
             <p>${items.recipient}</p>
-            <span class="time-left">11:01</span>
-        </div>`}`)}` : ''}   
+            <span class="time-left">${items.time}</span>
+        </div>`}`)}` : 'You don\'t have messages'}   
     </div>
     <div class="messageArea">
             <textarea  class="senderMessage" cols="60" rows="1"></textarea>
@@ -46,10 +47,11 @@ export default class Messages extends HTMLElement {
         
         let id = loggedUser().id
         let email = loggedUser().email
-        
+        let time = timeNow()
+
         getAllMessages().then(respons => {
             let firstMessage = respons.find(message => message.recipientId == id)
-                firstMessage.message.push({recipient: text})
+                firstMessage.message.push({recipient: text, time: time})
 
                 let userMessage = {
                     message:  firstMessage.message,
@@ -85,23 +87,24 @@ export default class Messages extends HTMLElement {
 
 
 
-function renderCall(data) {
+function renderCall(context) {
     
     getAllMessages().then(res => {
         let id = loggedUser().id
 
-        let firstMessage = res.find(message => message.recipientId == id)
-     
-        if(!firstMessage){
-            data.message = false;
-        }else{
-            data.message = true;
-            data.data = firstMessage.message
-            
+        let firstMessageRec = res.find(message => message.recipientId == id)
+        let firstMessageSen = res.find(mess => mess.sender === id)
+        if(firstMessageRec){
+            context.message = true;
+            context.data = firstMessageSen.message
+        }
+        if(firstMessageSen) {
+            context.message = true;
+            context.data = firstMessageSen.message
         }
 
 
-         data.render()
+        context.render()
 
          
         var scroll = document.querySelector(".container-chat");

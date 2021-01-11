@@ -1,11 +1,11 @@
 
 let API_messages = `https://game-land-58011-default-rtdb.firebaseio.com/messages`
 
-export async function sendMessages(recipientId,message,name,initials,senderId,userIdBaseDate,id) {
+export async function sendMessages(recipientId,message,name,initials,senderId,userIdBaseDate,id, time) {
 
     let messages = {
         recipient: recipientId,
-        message: [{sender: message}],
+        message: [{sender: message, time: time}],
         name,
         initials,
         sender: senderId,

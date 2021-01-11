@@ -4,6 +4,7 @@ import { loggedUser } from '../controller/data/userDATA.js';
 import { getDetails } from '../controller/dataUsers.js'
 import { sendMessages, getAllMessages, messageUser } from '../controller/message.js'
 import { getUserProfile } from '../controller/profiles.js'
+import { timeNow } from '../controller/timeAndDate.js';
 
 const templateDetails = (ctx) => html`
 <nav-components></nav-components>
@@ -68,7 +69,8 @@ export default class Details extends HTMLElement {
         let senderInitials = null;
         let sender = null;
         let splName = null;
-
+        let time = timeNow();
+    
         getDetails(id).then(data => {
 
 
@@ -101,7 +103,9 @@ export default class Details extends HTMLElement {
 
                 getAllMessages().then(res => {
                     if (res === null) {
-                        sendMessages(user.id, message, name, senderInitials, senderId, user.userIddataBase, id).then(res => {
+                       
+
+                        sendMessages(user.id, message, name, senderInitials, senderId, user.userIddataBase, id, time).then(res => {
                             Router.go('/')
                         })
                     } else {
@@ -109,7 +113,7 @@ export default class Details extends HTMLElement {
                         let isMessage = res.find(mess => mess.gameId === id)
 
                         if (sender && isMessage) {
-                            sender.message.push({ sender: message })
+                            sender.message.push({ sender: message, time: time })
                             messageUser(sender.key, sender.message).then(
                                 Router.go('/')
                             )
@@ -130,7 +134,8 @@ export default class Details extends HTMLElement {
         getDetails(id).then(data => this.data = data)
             .then(userdata => {
                 let sender = loggedUser().id
-
+                
+    
                 if (sender === userdata.createrIdBaseDate) {
                     this.creater = true;
                 } else {

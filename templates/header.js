@@ -79,8 +79,18 @@ export default class Nav extends HTMLElement {
         }).then(res => {
 
             getAllMessages().then(res => {
-           
-                this.emailCount = res.length
+            
+                let countMessages = 0;
+               
+
+                Object.entries(res).forEach(([key,value]) => {
+                    if(value.recipientId === id || value.sender === id){
+                        countMessages++;
+                    }
+                })
+                
+                    
+                this.emailCount = countMessages
     
                 this.render()
             })

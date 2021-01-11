@@ -21,6 +21,7 @@ body{
   right: 0;
   text-align: center;
   margin: 1em;
+  z-index: 1;
 }
 
 .notification {
@@ -154,12 +155,17 @@ body{
     background-image: linear-gradient(25deg, rgb(60, 221, 208), rgb(81, 113, 255));
 }
 
+.navbar {
+  position: sticky;
+  top: 0px;
+}
+
 .messageArea {
-  display: inline-block;
+  
   height: 20px;
-  position: relative;
-  bottom: 86px;
-  left: 370px;
+  position: absolute;
+  bottom: 15%;
+  left: 38%;
 }
 
 
@@ -233,7 +239,7 @@ body{
   float: left;
   position: relative;
   transform: skewX(25deg);
-  z-index: 2;
+  z-index: 10;
 }
 
 .menu a {
@@ -254,7 +260,7 @@ body{
 /* Dropdown */
 .submenu {
   position: absolute;
-  z-index: 100;
+  z-index: 10;
   width: 200px;
   left: 20%;
   margin-left: -100px;
@@ -266,21 +272,23 @@ body{
   background-color: #34495e;
   position: relative;
   overflow: hidden;
- 
+  z-index: 1000;
 }
 
 .submenu > li > a {
   padding: 1em 2em;
-  z-index: 1000;
+  
 }
 
 .submenu > li::after {
   content: "";
   position: absolute;
+  z-index: 1000;
   top: -125%;
   height: 100%;
   width: 100%;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+  
 }
 
 /* Odd stuff */
@@ -632,18 +640,7 @@ div.container {
     margin: 25px 0 0 0;
 }
 
-/* .game-home-page {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 35px;
-} */
 
-/* .container-games {
-   margin: 0 10px 15px ;
-    text-align: center;
-    flex-wrap: wrap; 
-} */
 
 /* show info game window */
 .tooltip {
@@ -652,7 +649,7 @@ div.container {
 
   }
   
-  .tooltip .tooltiptext {
+.tooltip .tooltiptext {
     visibility: hidden;
     background-color: rgb(161, 161, 161);
     color: rgb(26, 25, 25);
@@ -670,16 +667,16 @@ div.container {
     top: 100%;
     left: 50%;
     margin-left: -60px;
-  }
+}
 
-  .tooltip img {
+.tooltip img {
       width: 200px;
       border-radius: 8px;
-  }
+}
   
-  .tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptext {
     visibility: visible;
-  }
+}
 
 
 /* Market */
@@ -693,6 +690,7 @@ h2:after,
 .news .card:after,
 .news .article figcaption {
   position: absolute;
+  z-index: 2;
 }
 .rel,
 h2,
@@ -741,39 +739,13 @@ h2 span {
 .wrapper {
   padding: 15px;
 }
-/* h2 {
-  padding: 10px;
-  padding-left: 25px;
-  color: #ccc;
-  margin: 0;
-}
-h2 strong {
-  z-index: 2;
-  background: #24282f;
-  padding: 4px 8px;
-}
-h2 span {
-  font-size: 0.7em;
-  color: #aaa;
-  margin-left: 10px;
-}
-h2:after {
-  content: '';
-  z-index: 1;
-  bottom: 50%;
-  margin-bottom: -2px;
-  height: 2px;
-  left: 0;
-  right: 0;
-  background: #373d47;
-} */
 .cards,
 .news {
   flex-flow: row wrap;
 }
 .cards .card,
 .news .card {
-  margin: 20px;
+  margin: 80px 20px 20px 20px;
   width: 180px;
   height: 270px;
   overflow: hidden;
@@ -886,6 +858,7 @@ h2:after {
   transform: none;
 }
 
+
 /* -------------------------------------- */
 
 
@@ -895,9 +868,9 @@ h2:after {
 footer {
     padding: 0.5em;
     width: 100%;
-    position: fixed;
+     position: fixed;
     left: 0;
-    bottom: 0;
+    bottom: 0; 
     justify-content: center;
 }
 
@@ -907,12 +880,35 @@ footer {
   /* overflow: hidden; */
    display: flex;
   flex-wrap: wrap; 
+  justify-content: center;
 }
 
-.cards-temp {
+/* pagination */
+
+.pagenumber {
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  right:25%;
+  left:50%;
+}
+
+.paginat li {
+    display: inline;
+    border: 1px solid rgb(255, 136, 0);
+    margin: 10px 5px 5px 0px;
+    padding: 4px;
+}
+.paginat li a {
+  color: green;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+/* .cards-temp {
   display: flex;
   flex-wrap: wrap;
-}
+} */
 
 .cards-maker{
   margin: 5px;
@@ -1159,6 +1155,7 @@ footer {
 
 
 .senderMessage{
+  justify-content: center;
   width: auto;
   font: inherit;
   padding: 0.25em;
@@ -1179,7 +1176,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   height: 80%;
-  justify-content: space-between;
+  justify-content: center;
 }
 .all-message{
   width: 220px;

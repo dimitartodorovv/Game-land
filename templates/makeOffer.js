@@ -1,10 +1,10 @@
-import {Router} from 'https://unpkg.com/@vaadin/router'
+import {Router} from 'https://unpkg.com/@vaadin/router';
 import { html, render } from 'https://unpkg.com/lit-html?module';
 import { loggedUser } from '../controller/data/userDATA.js';
-import { setGameInMarket } from '../controller/dataUsers.js'
-import {getUserProfile} from '../controller/profiles.js'
-import {showInfo,errorMessage} from '../controller/notification.js'
-
+import { setGameInMarket } from '../controller/dataUsers.js';
+import {getUserProfile} from '../controller/profiles.js';
+import {showInfo,errorMessage} from '../controller/notification.js';
+import {timeNow} from '../controller/timeAndDate.js';
 
 
 const templateMakeOffer = (ctx) => html`
@@ -80,9 +80,8 @@ export default class MakeOffer extends HTMLElement {
             let description = document.querySelector('#description-game').value
             let phoneNumber = document.querySelector('#phonenumber').value
   
-            let dates = Date();       
-            let [day,month,date,years] = dates.split(' ')
-            let uploadDate =`${day} ${month} ${date} ${years}`;
+           
+            let uploadDate = timeNow()
           
             let id = loggedUser().id
             let findUser = null;

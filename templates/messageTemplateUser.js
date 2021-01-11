@@ -26,20 +26,30 @@ export default class MessageUserTemplate extends HTMLElement {
             let id = loggedUser().id
             let myMessages = [];
            
-             let yourMessages = res.find(message => message.recipientId == id)
+             let yourMessages = res.find(message => message.recipientId == id);
+            let senderMess = res.find(message => message.sender === id);
             
-          
              if(yourMessages){
 
                 res.forEach(message => {
-                    if(message.recipientId == id){
+                    if(message.recipientId === id){
                         myMessages.push(message); 
                     }
                 });
                    
                     this.message = true               
-                    this.data = myMessages;
-                    
+                    this.data = myMessages; 
+            }
+            if(senderMess){
+                
+                res.forEach(message => {
+                    if(message.sender === id){
+                        myMessages.push(message); 
+                    }
+                });
+                   
+                    this.message = true               
+                    this.data = myMessages; 
             }
            
            
