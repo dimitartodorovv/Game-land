@@ -31,12 +31,13 @@ const templateDetails = (ctx) => html`
             <textarea rows="1" id="description-game"></textarea>
         </label>
         <button class="btn-message" @click=${ctx.sendMessage}>Send</button>
+        <button class="btn-follow-message" @click=${ctx.followOffer}>Follow</button>
 
     </div>`}
 
     <div class="image-details">
         <div class="scene">
-            <div class="card">
+            <div class="card-details">
                 <div class="card__face card__face--front">
                     <img src="${ctx.data.imgUrl}" />
                 </div>
@@ -53,6 +54,11 @@ const templateDetails = (ctx) => html`
 
 export default class Details extends HTMLElement {
 
+    followOffer(e) {
+        e.preventDefault();
+            
+
+    }
 
     sendMessage(e) {
         e.preventDefault();
