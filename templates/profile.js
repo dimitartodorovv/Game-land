@@ -1,8 +1,8 @@
 import { Router } from 'https://unpkg.com/@vaadin/router'
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import makeProfile, { getUserProfile, changeUser } from '../controller/profiles.js'
-import { loggedUser, userDATA, token } from '../controller/data/userDATA.js'
-import { showInfo, errorMessage } from '../controller/notification.js';
+import makeProfile, { getUserProfile, changeUser } from '../dataController/profiles.js'
+import { loggedUser, userDATA, token } from '../dataController/data/userDATA.js'
+import { showInfo, errorMessage } from '../dataController/notification.js';
 
 
 const templateProfile = (ctx) => html`

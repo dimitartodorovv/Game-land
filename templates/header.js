@@ -1,7 +1,7 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import { loggedUser,token } from '../controller/data/userDATA.js'
-import {getUserProfile} from '../controller/profiles.js'
-import { getAllMessages } from '../controller/message.js';
+import { loggedUser,token } from '../dataController/data/userDATA.js'
+import {getUserProfile} from '../dataController/profiles.js'
+import { getAllMessages } from '../dataController/message.js';
 
 
 const templateNav = (ctx) => html`

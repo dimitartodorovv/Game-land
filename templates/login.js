@@ -1,8 +1,8 @@
 import {Router} from 'https://unpkg.com/@vaadin/router'
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import {login} from '../controller/auth.js'
-import {showInfo,errorMessage} from '../controller/notification.js'
-import {token} from '../controller/data/userDATA.js'
+import {login} from '../dataController/auth.js'
+import {showInfo,errorMessage} from '../dataController/notification.js'
+import {token} from '../dataController/data/userDATA.js'
 
 const templateLogin = (ctx) => html`
     <nav-components></nav-components>

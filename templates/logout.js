@@ -1,5 +1,5 @@
 import {Router} from 'https://unpkg.com/@vaadin/router'
-import {token} from '../controller/data/userDATA.js'
+import {token} from '../dataController/data/userDATA.js'
 
 
 export default class Logout extends HTMLElement {

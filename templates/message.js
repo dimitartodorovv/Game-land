@@ -1,8 +1,8 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import { getAllMessages, messageUser } from '../controller/message.js';
-import { loggedUser, token } from '../controller/data/userDATA.js';
+import { getAllMessages, messageUser } from '../dataController/message.js';
+import { loggedUser, token } from '../dataController/data/userDATA.js';
 import {Router} from 'https://unpkg.com/@vaadin/router';
-import { timeNow } from '../controller/timeAndDate.js';
+import { timeNow } from '../dataController/timeAndDate.js';
 
 
 const templateMessage = (ctx) => html`

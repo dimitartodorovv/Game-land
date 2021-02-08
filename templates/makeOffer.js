@@ -1,10 +1,10 @@
 import {Router} from 'https://unpkg.com/@vaadin/router';
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import { loggedUser } from '../controller/data/userDATA.js';
-import { setGameInMarket } from '../controller/dataUsers.js';
-import {getUserProfile} from '../controller/profiles.js';
-import {showInfo,errorMessage} from '../controller/notification.js';
-import {timeNow} from '../controller/timeAndDate.js';
+import { loggedUser } from '../dataController/data/userDATA.js';
+import { setGameInMarket } from '../dataController/dataUsers.js';
+import {getUserProfile} from '../dataController/profiles.js';
+import {showInfo,errorMessage} from '../dataController/notification.js';
+import {timeNow} from '../dataController/timeAndDate.js';
 
 
 const templateMakeOffer = (ctx) => html`

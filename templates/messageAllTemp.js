@@ -1,7 +1,7 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import { getAllMessages , oneMessage } from '../controller/message.js';
-import { loggedUser, token } from '../controller/data/userDATA.js';
-import {timeNow} from '../controller/timeAndDate.js';
+import { getAllMessages , oneMessage } from '../dataController/message.js';
+import { loggedUser, token } from '../dataController/data/userDATA.js';
+import {timeNow} from '../dataController/timeAndDate.js';
 
 
 const allMessageTemp = (ctx) => html`

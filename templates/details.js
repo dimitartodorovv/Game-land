@@ -1,10 +1,10 @@
 import { Router } from 'https://unpkg.com/@vaadin/router'
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import { loggedUser } from '../controller/data/userDATA.js';
-import { getDetails } from '../controller/dataUsers.js'
-import { sendMessages, getAllMessages, messageUser } from '../controller/message.js'
-import { getUserProfile } from '../controller/profiles.js'
-import { timeNow } from '../controller/timeAndDate.js';
+import { loggedUser } from '../dataController/data/userDATA.js';
+import { getDetails } from '../dataController/dataUsers.js'
+import { sendMessages, getAllMessages, messageUser } from '../dataController/message.js'
+import { getUserProfile } from '../dataController/profiles.js'
+import { timeNow } from '../dataController/timeAndDate.js';
 
 const templateDetails = (ctx) => html`
 <nav-components></nav-components>

@@ -1,5 +1,5 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import {getGameMarket} from '../controller/dataUsers.js';
+import {getGameMarket} from '../dataController/dataUsers.js';
 
 
 const templateMarket = (ctx) => html`

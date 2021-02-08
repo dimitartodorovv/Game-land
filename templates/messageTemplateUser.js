@@ -1,6 +1,6 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import {getAllMessages} from '../controller/message.js';
-import { loggedUser,token } from '../controller/data/userDATA.js';
+import {getAllMessages} from '../dataController/message.js';
+import { loggedUser,token } from '../dataController/data/userDATA.js';
 
 const templateUsers = (ctx) => html`
     ${ctx.message ? html `      

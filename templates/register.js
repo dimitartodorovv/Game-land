@@ -1,7 +1,7 @@
 import {Router} from 'https://unpkg.com/@vaadin/router'
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import {showInfo,errorMessage} from '../controller/notification.js'
-import {register} from '../controller/auth.js'
+import {showInfo,errorMessage} from '../dataController/notification.js'
+import {register} from '../dataController/auth.js'
 
 
 const templateRegister = (ctx) => html`
